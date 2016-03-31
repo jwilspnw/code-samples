@@ -1,9 +1,16 @@
+import java.util.Arrays;
+
 public class CircularSearch
 {
     public static void main(String[] args)
     {
         int[] circArray = {6,7,8,9,10,11,12,13,14,15,1,2,3,4,5};
+        System.out.println("Does 9 appear in " + Arrays.toString(circArray) + "?" );
         System.out.println(doesAppear(circArray, 9));
+        
+        int [] circArray2 = {6,7,8,10,11,12,13,14,15,1,2,3,4,5};
+        System.out.println("Does 9 appear in " + Arrays.toString(circArray2) + "?" );
+        System.out.println(doesAppear(circArray2, 9));
     }
     
     public static boolean doesAppear(int[] circArray, int key)
@@ -23,12 +30,14 @@ public class CircularSearch
             {
                 return false;
             }
-        } else {
-            Indices indices = new Indices(0, circArray.length - 1);
+        }
+        else
+        {
             int s = 0, e = circArray.length - 1;
 
-            while (s < e){
-                System.out.println("Start = " + circArray[s] + "   End = " + circArray[e]);
+            while (s < e)
+            {
+                //System.out.println("Start = " + circArray[s] + "   End = " + circArray[e]);
                 if ((circArray[s] == key) || (circArray[e] == key)) return true;
                 if (splitter(circArray, s, --e, key))
                 {
@@ -38,8 +47,6 @@ public class CircularSearch
                 {
                     s = e/2 + s/2;
                 }
-
-                //indices = new Indices(s,e);
             }
             return false;
         }
@@ -47,17 +54,13 @@ public class CircularSearch
 
     private static boolean splitter(int[] circArray, int start, int end, int key)
     {
-        // {4, 5, 6, 7, 8, 9, 1, 2, 3}
-        // {9, 1, 2, 3, 4, 5, 6, 7, 8}
         boolean firstHalf;
         if ((key >= circArray[start]) && (key <= circArray[end / 2]))
         {
-            //indices = new Indices(start, end / 2);
             firstHalf = true;
         }
         else if ((key > circArray[end / 2]) && (key <= end))
         {
-            //indices = new Indices(end / 2, end);
             firstHalf = false;
         }
         else if ((key <= circArray[end / 2]) && (key > circArray[end]))
