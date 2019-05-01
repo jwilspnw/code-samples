@@ -28,10 +28,24 @@ public class BombermanBoard {
             System.out.print("| ");
             for(Tile y : x)
             {
-                System.out.print(y.getType() + " ");
+                System.out.print(PrettyTile(y.getType()) + " ");
             }
             System.out.println("|");
         }
+    }
+
+    private static char PrettyTile(char tileChar)
+    {
+        switch (tileChar)
+        {
+            case 'x':
+                return '\u2588';
+            case 'e':
+                return 'O';
+            default:
+                return tileChar;
+        }
+        
     }
     
     public static Tile[][] buildBoard(Tile[][] board)
@@ -49,11 +63,11 @@ public class BombermanBoard {
         int tileTyper = rand.nextInt();
         
         // There are 3 different types of type possible: e (enemies), x (walls) and open spaces
-        if ((tileTyper % 3) == 2)
+        if ((tileTyper % 4) == 2)
         {
             emptyTile = new Tile('e');
         }
-        else if ((tileTyper % 3) == 1)
+        else if ((tileTyper % 4) == 1)
         {
             emptyTile = new Tile('x');
         }
